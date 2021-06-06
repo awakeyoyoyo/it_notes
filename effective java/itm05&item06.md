@@ -124,6 +124,8 @@ int totalprim = total;
 
 这里给出结论：使用基本类型会比使用装箱类型更快。
 
+**当 “==”运算符的两个操作数都是 包装器类型的引用，则是比较指向的是否是同一个对象，而如果其中有一个操作数是表达式（即包含算术运算）则比较的是数值（即会触发自动拆箱的过程）。**
+
 例如：
 
 ```java
@@ -134,73 +136,4 @@ for(int i=0;i<10;i++){
 ```
 
 上述代码使用的装箱类型，每次sum+=i的时候都会构建一个Long实例，即生成了多余的对象，我们使用long基本类型就可以完美解决，优化性能。
-
-### Item07:Eliminate expired object references 消除过期的对象引用
-
-
-
-JAVA中有自动的回收功能，但某些地方如果书写的代码不好仍然会出现内存泄漏。这里举个例子：栈实现
-
-```java
-public class MemoryLeakStack {
-    private Object[] elements;
-    private int size;
-    private static final int DEFAULT_INITIAL_CAPACITY=16;
-
-    public MemoryLeakStack(){
-        elements=new Object[DEFAULT_INITIAL_CAPACITY];
-    }
-
-    public void push(Object e){
-        ensureCapacity();
-        elements[size++]=e;
-    }
-
-    public Object pop(){
-        if (size==0){
-            throw new EmptyStackException();
-        }
-        return elements[--size];
-    }
-
-    private void ensureCapacity() {
-        if (elements.length==size){
-            //返回一个新的数组对象，复制旧数组且扩大长度
-            elements= Arrays.copyOf(elements,2*size+1);
-        }
-    }
-
-}
-```
-
-一眼看去，貌似没啥问题，但是其实在pop方法中存在着安全隐患，它只是仅仅将stack的长度size--，而并没有将数组中的对象引用消除，导致会存在一直无法使用的对象存活在内存中。
-
-这里的改进方式是：
-
-```java
-  public Object pop(){
-        if (size==0){
-            throw new EmptyStackException();
-        }
-        Object result= elements[--size];
-    		elements[size]=null; //消除引用
-    		return result;
-    }
-```
-
-虽然看起来很简单且java也提供了自动回收机制，但日常开发中还是要注意消除引用。
-
-那么JAVA中有哪些场景需要注意的呢？
-
-##### 1、只要类是自己管理内存，就需要警惕。例如刚刚举的Stack例子
-
-##### 2、对象存放到缓存。
-
-需要注意的是当对象引用放入缓存中，如果它很久不会被使用，那么该引用应该进行消除。解决方法：可以使用WeakHashMap代表缓存。
-
-WeakHashMap细说
-
-##### 3、监听器以及其他回调。
-
-
 
