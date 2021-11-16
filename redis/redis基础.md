@@ -59,3 +59,99 @@
 `setex k1 v1 10` 设置值的时候设置过期时间
 
 > 以上操作亦是原子性!!
+
+#### Redis 集合List
+
+> 底层实现是双向链表，可以随心所欲的高效率的插入删除任意位置的元素
+
+`lpush/rpush k1 lqhao zpwen`  分别是头插法插入、尾插法插入袁术
+
+`lpop/rpop k1` 分别从左边右边抛出一个值
+
+`rpoplpush k1 k2` 从k1的右边取出值，放入k2的左边
+
+`lrange k1 0 -1` 根据索引获取下表的元素，从左到右，0~-1代表获取所有
+
+`llen` 获取列表的长度
+
+`linsert <key> before <value> <newValue>` 在value的后面插入newValue 改成after也生效
+
+`lrem <key> <n> <value>` 从左边删除n个value 从左到右
+
+`lset <key> <index> <value>` 将列表key下标为index的值替换成value
+
+**底层数据结构**
+
+快速链表quickList，在列表元素较少的情况下使用一块连续的内存存储，这个结构是zipList，依旧是压缩列表，即多个元素合并在一起
+
+它讲所有元素紧挨着一起存储，分配连续的内存。
+
+当数据量比较大的时候改成quickList
+
+数据量比较大的时候才改成quickList,因为普通链表需要附加的指针空间太大，会浪费空间，加上额外的两个指针。
+
+多个压缩链表组成一个双向链表，减少每个元素就加两个指针
+
+Redis将链表和zipList结合成quickList，将多个zipList使用双向指针串联起来，即可快速插入删除，又不会出现太大的空间冗余。
+
+#### Redis 集合Set
+
+> Set可以自动去重，String类型中国的无需集合，底层就是一个value为null的hash表，所有的添加删除查找都是O1
+
+`sadd k1 lqhao zpwen` 放set中放入值
+
+`smembers k1` 查看set的值
+
+`smembers k1 lqhao`  检查set中是否存在lqhao
+
+`scard k1` 返回该集合的元素个数
+
+`srem k1 lqhao zpwen` 删除集合中的元素
+
+`spop k1`  随机取出集合中的值
+
+`sinter k1 k2` 返回两个元素众的交集
+
+`sunion k1 k2` 返回两个集合中的并集
+
+`sdiff k1 k2` 返回两个集合的差集，元素k1中不包含k2的
+
+**redis-set的数据结构**
+
+set的数据结构是dict字段，字段是用哈希表实现。
+
+#### Redis 哈希
+
+Redis hash是一个键值对集合
+
+Redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。
+
+类似于java里面的Map<String,Objcet>
+
+`hset <key> <filed> <value>` 给key集合中的 field键赋值value  可以理解为套娃
+
+`hget <key> <filed>` 从key集合中<field>取出value
+
+`hmset <key1><filed1><value1> <key2>...` 批量设置hash值
+
+`hexists <key1><filed1>` 查看哈希表key中，给定的域field是否存在
+
+`hkeys <key>` 列出该hash集合的所有field
+
+`hvals <key>` 列出该hash集合的所有value
+
+**hash的数据结构**
+
+Hash类型对应的数据结构是两种：zipList 压缩列表，hashTable哈希表。当field-value长度较短且个数较少时，使用zipList，否则使用hashTable
+
+#### Redis 有序集合 Zset
+
+> Redis有序集合Zset和普通set相似，都是没有重复元素的字符串集合
+>
+> 不同的是每个成员都关联了一个评分（score），这个频繁用来按照最低分到最高分的方式排序集合中的成员，集合的成员是唯一的，但是评分可以重复
+>
+> 可按照顺序来获取集合
+
+`zadd <key><score1><value1> <key2>...`将一个或者多个member元素机器score值存储有序集合key当中
+
+`zrange <key><start><stop>[WITHSCORES]` 返回有序集key中，下表在start~stop之间的元素
