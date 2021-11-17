@@ -152,6 +152,53 @@ Hash类型对应的数据结构是两种：zipList 压缩列表，hashTable哈�
 >
 > 可按照顺序来获取集合
 
-`zadd <key><score1><value1> <key2>...`将一个或者多个member元素机器score值存储有序集合key当中
+`zadd <key> <score1><value1>  <key2>...`将一个或者多个member元素机器score值存储有序集合key当中
 
 `zrange <key><start><stop>[WITHSCORES]` 返回有序集key中，下表在start~stop之间的元素
+
+`zrangebyscore key min max [WITHSCORES] ` 返回min和max之间的成员，有序集和成员按照score值递增从小到大排序
+
+`zrevrangebyscore key maxmin [WITHSCORES][limit offset count] ` 同上，改为从大到小排序，查询出来
+
+`zincrby key  addNums value` 给value增加scores+addNums
+
+`zrem key value` 删除指定元素
+
+`zcount key min max` 统计min到max范围内元素个数
+
+`zrank key value`  检测出value的排名 
+
+**数据结构**
+
+Zset是Redis提供的特殊数据结构，底层使用了hash和跳跃表来实现。
+
+1）hash，hash的作用用于关联元素value和权重score，保障元素value的唯一性，可以通过元素value找到相应的score值
+
+2）跳跃表，目的是在于给元素value排序，根据score的范围获取元素列表
+
+#### 配置表
+
+`bine ` 绑定某个ip，指定某个ip可以访问吧
+
+`protected-mode no/yes`   是否开启保护模式 即是否只能本地访问
+
+`tcp-backlog `,bakclog队列总和=未完成三次握手+已完成三次握手队列，高并发下可能需要设置高的backlog来避免慢客户端连接问题
+
+`timeout 0`  在连接死亡后 关闭连接所等待的时间
+
+`tcp-keeplive 300` 超过300s没做操作就设定连接死亡
+
+`pidfile` 设置文件存储进程号
+
+#### Redis发布与订阅
+
+>消息通信模式：发送者pub发送消息，订阅者sub接收消息。
+
+`SUNSCRIBE channel01` 订阅频道
+
+`public channel01 hello` 往channel01中发消息
+
+#### Redis新数据类型
+
+#### bitMaps
+
