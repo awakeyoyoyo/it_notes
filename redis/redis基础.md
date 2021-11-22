@@ -202,3 +202,41 @@ Zset是Redis提供的特殊数据结构，底层使用了hash和跳跃表来实�
 
 #### bitMaps
 
+Redis提供BitMaps这个数据类型，可以实现对位操作。位图
+
+Bitmaps本身就是对于二进制的位的一种操作，每个单元只存储0 1
+
+`setbit key offset value ` 设置值
+
+`getbit key offset` 获取对应位移下值
+
+`bitcount key` 计算为1数量
+
+根据位运算来计算日活用户！！！ and
+
+存储的空间非常少，适合用于大部分数据都是活跃的，如果只是少部分数据活跃的，就会有大量空间的浪费。
+
+#### HyperLogLog
+
+用于统计不重复的元素的数量。
+
+`pfadd key element [element...]` 添加指定元素到HyperLogLog中
+
+`pfcount key` 统计出基数
+
+`pfmerge key01 key02` 合并
+
+#### Geospatial
+
+该类型，就是元素的二维坐标，地图上的经纬度。提供了经纬度的设置，查询，范围查询，距离查询，经纬度hash等操作
+
+`geoadd key longtidu latitude menber`  添加经纬度+名称
+
+`geopos key member`获取指定名称的经纬度
+
+
+
+#### 例子
+
+手机注册码
+
