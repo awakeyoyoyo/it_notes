@@ -94,7 +94,7 @@ typedef struct list{
 }list;
 ```
 
-![reids_list](../images/redis_list.png)
+![reids_list](../../images/redis_list.png)
 
 #### Redis链表特性
 
@@ -152,7 +152,7 @@ typedef struct dictEntry{
 }dictEntry
 ```
 
- ![reids_list](../images/redis_map.png)
+ ![reids_list](../../images/redis_map.png)
 
 #### Redis字典特性
 
@@ -201,7 +201,7 @@ typedef struct dictEntry{
 - 如果一个元素出现在某一层（level i）的链表中，那么在该层（level i）下的链表也全都会出现（上层元素是当前层元素的子集）
 - 链表中的每个节点都包含两个指针，一个指向同一层的下一节点，另一个指向下一层的同一个链表的节点
 
-![redis_skiplist](../images/redis_skiplist.png)
+![redis_skiplist](../../images/redis_skiplist.png)
 
 #### 数据结构
 
@@ -287,11 +287,11 @@ typedef struct intset{
 
 **压缩列表的原理：压缩列表并不是对数据利用某种算法进行压缩，而是将数据按照一定规则编码在一块连续的内存区域，目的是节省内存。**
 
-![redis_ziplist01](../images/redis_ziplist01.png)
+![redis_ziplist01](../../images/redis_ziplist01.png)
 
 压缩列表的每个节点构成如下：
 
-![redis_ziplist02](../images/redis_ziplist02.png)
+![redis_ziplist02](../../images/redis_ziplist02.png)
 
 压缩列表是Redis为节省内存而开发的顺序型数据结构，通常作为**链表键**和**哈希键**的底层实现之一。
 

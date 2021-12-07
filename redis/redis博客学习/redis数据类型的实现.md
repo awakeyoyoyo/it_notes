@@ -30,11 +30,11 @@ typedef struct redisObject{
 
 **编码常量：**
 
-![redis_encoding](../images/redis_encoding01.png)
+![redis_encoding](../../images/redis_encoding01.png)
 
 **数据类型对应的不同编码格式实现：**
 
-![redis_encoding02](../images/redis_encoding02.png)
+![redis_encoding02](../../images/redis_encoding02.png)
 
 `OBJECT ENCODING  key`  查看值对象的编码实现
 
@@ -56,11 +56,11 @@ embstr与raw都使用redisObject和sds保存数据，区别在于，embstr的使
 
 **短字符串数据结构:**
 
-![redis_string](../images/redis_string.png)
+![redis_string](../../images/redis_string.png)
 
 **长字符串数据结构:**
 
-![redis_string](../images/redis_string02.png)
+![redis_string](../../images/redis_string02.png)
 
 #### 编码转换
 
@@ -96,13 +96,13 @@ embstr与raw都使用redisObject和sds保存数据，区别在于，embstr的使
 
 ##### ziplist
 
-![redis_hash](../images/redishash01.png)
+![redis_hash](../../images/redishash01.png)
 
 hashtable 编码的哈希表对象底层使用字典数据结构，哈希对象中的每个键值对都使用一个字典键值对。
 
 ##### hashtable
 
-![redis_hash](../images/redishash02.png)
+![redis_hash](../../images/redishash02.png)
 
 #### 编码转换
 
@@ -126,13 +126,13 @@ intset 编码的集合对象使用**整数集合**作为底层实现，集合对
 
 ##### intset :
 
-![hash_set01](../images/redis_set01.png)
+![hash_set01](../../images/redis_set01.png)
 
 hashtable 编码的集合对象使用 **字典**作为底层实现，字典的每个键都是一个字符串对象，这里的每个字符串对象就是一个集合中的元素，而字**典的值则全部设置为 null**。这里可以类比Java集合中HashSet 集合的实现，HashSet 集合是由 HashMap 来实现的，集合中**的元素就是 HashMap 的key**，而 HashMap **的值都设为 null。**
 
 ##### hashtable: 
 
-![redis_set02](../images/hash_set02.png)
+![redis_set02](../../images/hash_set02.png)
 
 #### 编码转换
 
