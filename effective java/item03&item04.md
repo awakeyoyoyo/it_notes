@@ -1,4 +1,4 @@
-### Item03:Enforce the singleton property with a private constructor or an enum type 使用私有构造器或者美剧类强化单例模式
+### ååItem03:Enforce the singleton property with a private constructor or an enum type 使用私有构造器或者美剧类强化单例模式
 
 实现单例模式主要由两种方式：这两种方式都要保持构造器为私有的，并且导出共有的静态成员，以便于客户端能够访问该类的唯一实例。
 
