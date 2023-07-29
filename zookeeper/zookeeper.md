@@ -165,11 +165,197 @@ zk的数据是运行在内存中，zk提供了两种持化机制:
 - 创建节点并设置权限
   
   > create /node abcd auth:xiaowang:123456:cdwra
-  > 
   > create [node] [value] auth:[user]:[pwd]:[auth]
 
 - 在另一个会话中必须先使用账号密码，才能拥有操作该节点的权限
 
 #### Curator客户端使用
 
-##### Curator
+```java
+package com.awake.zookeeper;
+
+import com.awake.net.config.model.NetConfig;
+import com.awake.net.config.model.ZookeeperRegistryProperties;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.retry.RetryNTimes;
+import org.apache.zookeeper.CreateMode;
+import org.junit.Test;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import java.io.IOException;
+
+
+/**
+ * @version : 1.0
+ * @ClassName: zookeeperTest
+ * @Description: TODO
+ * @Auther: awake
+ * @Date: 2023/7/11 18:16
+ **/
+public class CuratorTest {
+
+    private final ZookeeperRegistryProperties zookeeperRegistryProperties = new ZookeeperRegistryProperties();
+
+    private CuratorFramework initCuratorFramework(String s) {
+        zookeeperRegistryProperties.setRetryCount(5);
+        zookeeperRegistryProperties.setSessionTimeoutMs(60000);
+        zookeeperRegistryProperties.setElapsedTimeMs(5000);
+        zookeeperRegistryProperties.setConnectionTimeoutMs(5000);
+        zookeeperRegistryProperties.setConnectionAddress(s);
+
+        CuratorFramework curatorFramework = CuratorFrameworkFactory.newClient(
+                zookeeperRegistryProperties.getConnectionAddress(),
+                zookeeperRegistryProperties.getSessionTimeoutMs(),
+                zookeeperRegistryProperties.getConnectionTimeoutMs(),
+                new RetryNTimes(zookeeperRegistryProperties.getRetryCount(), zookeeperRegistryProperties.getElapsedTimeMs())
+        );
+        curatorFramework.start();
+        return curatorFramework;
+    }
+
+    @Test
+    public void testCurator() throws IOException {
+        CuratorFramework curatorFramework = initCuratorFramework("127.0.0.1:2181");
+        System.out.println(curatorFramework.getState());
+        System.in.read();
+    }
+
+    @Test
+    public void testCreateNode() throws Exception {
+        CuratorFramework curatorFramework = initCuratorFramework("127.0.0.1:2181");
+        //添加持久节点
+        String path = curatorFramework.create().forPath("/curator-node");
+        //添加临时序号节点
+        String path2 = curatorFramework.create().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath("/curator-node", "just lose it".getBytes());
+
+        System.out.println(String.format("curator create node :%s successful.", path));
+
+        System.out.println(String.format("curator create ephemeral node :%s successful.", path2));
+
+        System.in.read();
+    }
+
+    @Test
+    public void testGetData() throws Exception {
+        CuratorFramework curatorFramework = initCuratorFramework("127.0.0.1:2181");
+
+        byte[] bytes = curatorFramework.getData().forPath("/curator-node");
+        System.out.println("curator-node message:" + new String(bytes));
+    }
+
+
+    @Test
+    public void testSetData() throws Exception {
+        CuratorFramework curatorFramework = initCuratorFramework("127.0.0.1:2181");
+
+        curatorFramework.setData().forPath("/curator-node", "just lose it".getBytes());
+        byte[] bytes = curatorFramework.getData().forPath("/curator-node");
+        System.out.println("curator-node message:" + new String(bytes));
+    }
+
+    @Test
+    public void testCreateWithParent() throws Exception {
+        CuratorFramework curatorFramework = initCuratorFramework("127.0.0.1:2181");
+
+        String pathWithParent = "/node-parent/sub-node-1";
+        String path = curatorFramework.create().creatingParentsIfNeeded().forPath(pathWithParent);
+        System.out.println(String.format("curator create node :%s successfully", path));
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+        CuratorFramework curatorFramework = initCuratorFramework("127.0.0.1:2181");
+
+        String pathWithParent = "/node-parent";
+
+        curatorFramework.delete().guaranteed().deletingChildrenIfNeeded().forPath(pathWithParent);
+    }
+
+    @Test
+    public void testAddNodeListener() throws Exception {
+        CuratorFramework curatorFramework = initCuratorFramework("127.0.0.1:2181");
+    }
+
+}
+
+```
+
+#### zookeeper实现分布式锁
+
+##### zookeeper锁的种类
+
+- 读锁
+
+- 写锁
+
+##### zookeeper如何上读锁    -还是个公平的
+
+- **创建一个节点**代表公共资源
+
+- 创建一个子**临时序号节点**，节点数据是**read**，表示读锁
+
+- 获取当前公共资源的最小子节点。
+
+- 判断最小节点是否是读锁
+  
+  - 如果不是读锁，则上锁失败，为最小节点设置监听，阻塞等待，zookeeper的监听机制会当最小节点发生变化时通知当前节点，于是执行第二步的流程
+  
+  - 如果是读锁则上锁成功
+
+##### zookeeper如何上写锁
+
+- 创建一个节点代表公共资源
+
+- 获取改节点的所有子节点
+
+- 判断自己是否**是最小的子节点**
+  
+  - 如果是最小节点，则上锁成功
+  
+  - 如果不是，说明前面还有锁，则上锁失败，监听最小节点，如果最小节点有变化，则回到第二步
+
+##### 羊群效应
+
+zookeeper最好调整为链式监听。即每次监听的是最小的节点，由上序号的节点来推动。既实现了公平锁又减少了全部都监听同一个节点
+
+#### zookeeper的watch机制
+
+#####  1、watch机制介绍
+
+watch是注册在特定Znode上的触发器。当着Znode发生变化，**create，delete，setData**方法的时候，将会出发Znode上注册的对应事件，设置了Watch的客户端会收到异步通知。
+
+客户端使用NIO通信方式监听服务端的调用
+
+#### 2、zookeeper客户端使用watch
+
+> get -w /node   一次性监听节点
+> 
+> ls -w /node 监听目录，创建和删除子节点都会收到通知。子节点新增节点不会收到通知
+> 
+> ls -R -w /node 监听节点中子节点的子节点的变化
+
+#### Zookeeper分布式锁实现
+
+互斥锁设计的核心思想：同一时间，仅一个进程/线程可以占有
+
+1. 临时节点：利用**临时节点**，会话中断，就会删除的特点，避免死锁
+2. 节点的顺序性：利用同一路径下，不能存在相同节点，节点创建存在顺序，先创建的节点的序号更小，序号最小的节点占有锁
+3. Watch机制：监听当前占用锁的路径，如果锁对应的路径被修改，就唤醒所有等待的节点
+
+#### zookeeper集群
+
+主要角色：Leader、Follower、Observer
+
+- Leader：主节点
+  
+  > 数据的读写，处理集群中所有事务请求。
+
+- Follower：从节点
+  
+  > 负责数据的读，并且可以参加leader的选举
+
+- Observer：观察者
+  
+  > 只负责读，不负责参加Leader的选举
