@@ -359,3 +359,19 @@ watch是注册在特定Znode上的触发器。当着Znode发生变化，**create
 - Observer：观察者
   
   > 只负责读，不负责参加Leader的选举
+
+#### ZAB协议
+
+#### CAP理论
+
+- C 一致性（Consistency）
+  
+  所有更新操作成功返回客户端后，所有节点在同一时间的数据完全一致
+
+- A 可用性（Acailability）
+
+        指服务一直可用，并且是正常影响时间
+
+- P 分区容错性 （Partition tolerance）
+  
+  遇到节点故障的时候，仍然可以对外提供满足一致性或者可用性的服务
