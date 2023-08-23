@@ -32,3 +32,6 @@
     
 ### 12. zfoo的协议比protobuf快的原因是什么
     zfoo用了字节增强和用了netty的byteBuf。 字节增强使得每次调用都等于对象直接调用。  zfoo字节数小的原因：数值类型进行了压缩算法。而且zfoo支持的语言比较少，很多地方不需要做兼容。所以快
+
+### 13. justloseit线程池模块需要加强：支持异步回调
+    使用ComputeFuture
