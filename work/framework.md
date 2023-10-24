@@ -44,5 +44,5 @@
     gateway滚服的算法一般采用：根据uid解析出sid，根据sid，根据数据库查表得到进程sid对应的进程id，转发到对应的服务进程处理。
     
 ### 16.gateway和broker的区别
-    gateway是对外的是 整体架构对外的接口
-    broker是对内 负责内部架构的消息转发，将消息分发的逻辑放在broker处理。
+    gateway是对外的是 整体架构对外的接口 需要公网ip地址
+    broker是对内 负责内部架构的消息转发，将消息分发的逻辑放在broker处理。逻辑服只需关心将消息发送给broker，broker负责将协议转发即可。
