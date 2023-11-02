@@ -84,3 +84,10 @@
     而是springboot loader模块的JarLauncher
     用一个新的claaloader 去加载一个业务jar
     反射获取JarLauncher，一个服务一个classloader，通过类加载隔离，直接另类实现单进程多服
+    
+### 23. Rpc模块实现
+    1、每个跨服协议包都携带一个信号包，信号包主要有两个状态：1-客户端发出 2-服务端返回
+    2、客户端发送完信号包后，将后续响应操作封装到CompleteFuture以信号id为key存储起来
+    3、服务端收到信号包，将信号包状态标识标记为2，并且处理相关业务逻辑，随后返回packet和信号包给客户端
+    4、客户端收到应答后，根据信号id，拿到对应的CompleteFuture进行回调结果的处理。
+    （创建对应的CompleteFuture的时候指定回调后的处理线程，可以保证发送不阻塞Rpc，回调后仍然在发送线程执行）    
