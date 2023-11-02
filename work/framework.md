@@ -76,3 +76,11 @@
     Jprofiler定位
     链路追踪
     profile火焰图
+    
+### 22. springboot父子容器
+    springboot包解压，查看MAINEST.MF文件
+    找到main class和start class
+    springboot启动执行的并不是项目的main
+    而是springboot loader模块的JarLauncher
+    用一个新的claaloader 去加载一个业务jar
+    反射获取JarLauncher，一个服务一个classloader，通过类加载隔离，直接另类实现单进程多服
