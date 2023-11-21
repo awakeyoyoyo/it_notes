@@ -110,5 +110,7 @@
 
 ### 27.帧同步
 
-### 28. 路由部分 moduleId和protoId 区分开来
+### 28. 路由部分 
+    moduleId和protoId 区分开来
+    路由做到无状态。现在需要proto解析packet才可以顺利转发
     
