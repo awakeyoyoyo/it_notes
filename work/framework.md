@@ -119,4 +119,15 @@
 ### 30.数据密集型引用.pdf
 
 ### 31.框架支持 断言&异常机制 
+
+### 32.mongodb
+  创建权限语句：
+```
+ db.createUser({
+        	user: 'admin'
+        	pwd: 'lqh666***'
+        	role: 'root'
+        	db:'justloseit'
+        })
+```
     
