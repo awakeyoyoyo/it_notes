@@ -130,4 +130,5 @@
         	db:'justloseit'
         })
 ```
+    必须有空构造方法&get set方法
     
