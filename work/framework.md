@@ -147,5 +147,13 @@
     跨服排行榜服务器 一对多 （读写都会比较频繁） 
     上述可以考虑合到同一个跨服服务器中处理。
     ....
-    
+
+### 34.总结justloseit各个模块实现
+    - net
+    - storage
+    - hotswap
+    - orm
+    - scheduler
+    - thread
+    - event
     
