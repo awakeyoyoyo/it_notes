@@ -149,7 +149,7 @@
     ....
 
 ### 34.总结justloseit各个模块实现
-    - net
+    - net （packet注解优化方向：模块信息和协议号 改为外部定义 javaBean仅用于序列化反序列化）
     - storage
     - hotswap
     - orm
