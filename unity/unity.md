@@ -10,6 +10,5 @@
 
 > unity发布Pc版本  然乎使用inno setup or nsis。
 
-
-
-
+unity组件
+- Tilemap（瓦片地图）是一种用于创建2D游戏地图的功能。Tilemap系统允许开发者通过将图块（Tiles）排列在网格中来快速构建复杂的2D地图。Unity的Tilemap功能提供了简单且高效的方式来处理大量2D图块，同时还可以方便地编辑和管理地图。
