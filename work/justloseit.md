@@ -127,11 +127,16 @@ false表示：是别的服务提供者发送给网关的，网关可以再次做
 ### 优雅使用|或运算
 
 ```JAVA
-enum Permission {
-    Read =1,    //0001
-    Write =2,   //0010
-    Execute =4  //0011
-};
+int  Read =1,    //0001
+int   Write =2,   //0010
+int  Execute =4  //0100
 ```
-通过|运算可以继承所有的权限，例如： 等于4 0011 即拥有了三个权限
-```Permission combinedPermission = Permission.Read | Permission.Write;```
+通过|运算可以继承Read、Write的权限， 0011=3    
+```int combinedPermission = Read | Write;```
+
+上诉组合了权限集合，那么进行判断可以用与运算
+```java
+if(combinedPermission & Read){
+    //拥有改权限
+}
+```
