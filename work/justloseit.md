@@ -121,3 +121,17 @@ false表示：是别的服务提供者发送给网关的，网关可以再次做
 服务提供者：
 
 > 配置提供服务端口，服务信息。构建GrpcServer将服务注册进去
+
+
+
+### 优雅使用|或运算
+
+```JAVA
+enum Permission {
+    Read =1,    //0001
+    Write =2,   //0010
+    Execute =4  //0011
+};
+```
+通过|运算可以继承所有的权限，例如： 等于4 0011 即拥有了三个权限
+```Permission combinedPermission = Permission.Read | Permission.Write;```
