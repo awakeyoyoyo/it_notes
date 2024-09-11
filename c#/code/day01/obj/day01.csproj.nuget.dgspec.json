@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "f:\\it_notes\\c#\\code\\day01\\day01.csproj": {}
+    "F:\\it_notes\\c#\\code\\day01\\day01.csproj": {}
   },
   "projects": {
-    "f:\\it_notes\\c#\\code\\day01\\day01.csproj": {
+    "F:\\it_notes\\c#\\code\\day01\\day01.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "f:\\it_notes\\c#\\code\\day01\\day01.csproj",
+        "projectUniqueName": "F:\\it_notes\\c#\\code\\day01\\day01.csproj",
         "projectName": "day01",
-        "projectPath": "f:\\it_notes\\c#\\code\\day01\\day01.csproj",
+        "projectPath": "F:\\it_notes\\c#\\code\\day01\\day01.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "f:\\it_notes\\c#\\code\\day01\\obj\\",
+        "outputPath": "F:\\it_notes\\c#\\code\\day01\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config"
