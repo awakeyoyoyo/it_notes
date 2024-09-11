@@ -1,0 +1,15 @@
+f:\it_notes\c#\code\asyn\bin\Debug\net8.0\asyn.exe
+f:\it_notes\c#\code\asyn\bin\Debug\net8.0\asyn.deps.json
+f:\it_notes\c#\code\asyn\bin\Debug\net8.0\asyn.runtimeconfig.json
+f:\it_notes\c#\code\asyn\bin\Debug\net8.0\asyn.dll
+f:\it_notes\c#\code\asyn\bin\Debug\net8.0\asyn.pdb
+f:\it_notes\c#\code\asyn\obj\Debug\net8.0\asyn.GeneratedMSBuildEditorConfig.editorconfig
+f:\it_notes\c#\code\asyn\obj\Debug\net8.0\asyn.AssemblyInfoInputs.cache
+f:\it_notes\c#\code\asyn\obj\Debug\net8.0\asyn.AssemblyInfo.cs
+f:\it_notes\c#\code\asyn\obj\Debug\net8.0\asyn.csproj.CoreCompileInputs.cache
+f:\it_notes\c#\code\asyn\obj\Debug\net8.0\asyn.sourcelink.json
+f:\it_notes\c#\code\asyn\obj\Debug\net8.0\asyn.dll
+f:\it_notes\c#\code\asyn\obj\Debug\net8.0\refint\asyn.dll
+f:\it_notes\c#\code\asyn\obj\Debug\net8.0\asyn.pdb
+f:\it_notes\c#\code\asyn\obj\Debug\net8.0\asyn.genruntimeconfig.cache
+f:\it_notes\c#\code\asyn\obj\Debug\net8.0\ref\asyn.dll

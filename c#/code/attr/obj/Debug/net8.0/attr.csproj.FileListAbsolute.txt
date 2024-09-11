@@ -1,0 +1,15 @@
+f:\it_notes\c#\code\attr\bin\Debug\net8.0\attr.exe
+f:\it_notes\c#\code\attr\bin\Debug\net8.0\attr.deps.json
+f:\it_notes\c#\code\attr\bin\Debug\net8.0\attr.runtimeconfig.json
+f:\it_notes\c#\code\attr\bin\Debug\net8.0\attr.dll
+f:\it_notes\c#\code\attr\bin\Debug\net8.0\attr.pdb
+f:\it_notes\c#\code\attr\obj\Debug\net8.0\attr.GeneratedMSBuildEditorConfig.editorconfig
+f:\it_notes\c#\code\attr\obj\Debug\net8.0\attr.AssemblyInfoInputs.cache
+f:\it_notes\c#\code\attr\obj\Debug\net8.0\attr.AssemblyInfo.cs
+f:\it_notes\c#\code\attr\obj\Debug\net8.0\attr.csproj.CoreCompileInputs.cache
+f:\it_notes\c#\code\attr\obj\Debug\net8.0\attr.sourcelink.json
+f:\it_notes\c#\code\attr\obj\Debug\net8.0\attr.dll
+f:\it_notes\c#\code\attr\obj\Debug\net8.0\refint\attr.dll
+f:\it_notes\c#\code\attr\obj\Debug\net8.0\attr.pdb
+f:\it_notes\c#\code\attr\obj\Debug\net8.0\attr.genruntimeconfig.cache
+f:\it_notes\c#\code\attr\obj\Debug\net8.0\ref\attr.dll

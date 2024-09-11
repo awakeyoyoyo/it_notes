@@ -1,0 +1,15 @@
+f:\it_notes\c#\code\publication\bin\Debug\net8.0\publication.exe
+f:\it_notes\c#\code\publication\bin\Debug\net8.0\publication.deps.json
+f:\it_notes\c#\code\publication\bin\Debug\net8.0\publication.runtimeconfig.json
+f:\it_notes\c#\code\publication\bin\Debug\net8.0\publication.dll
+f:\it_notes\c#\code\publication\bin\Debug\net8.0\publication.pdb
+f:\it_notes\c#\code\publication\obj\Debug\net8.0\publication.GeneratedMSBuildEditorConfig.editorconfig
+f:\it_notes\c#\code\publication\obj\Debug\net8.0\publication.AssemblyInfoInputs.cache
+f:\it_notes\c#\code\publication\obj\Debug\net8.0\publication.AssemblyInfo.cs
+f:\it_notes\c#\code\publication\obj\Debug\net8.0\publication.csproj.CoreCompileInputs.cache
+f:\it_notes\c#\code\publication\obj\Debug\net8.0\publication.sourcelink.json
+f:\it_notes\c#\code\publication\obj\Debug\net8.0\publication.dll
+f:\it_notes\c#\code\publication\obj\Debug\net8.0\refint\publication.dll
+f:\it_notes\c#\code\publication\obj\Debug\net8.0\publication.pdb
+f:\it_notes\c#\code\publication\obj\Debug\net8.0\publication.genruntimeconfig.cache
+f:\it_notes\c#\code\publication\obj\Debug\net8.0\ref\publication.dll
