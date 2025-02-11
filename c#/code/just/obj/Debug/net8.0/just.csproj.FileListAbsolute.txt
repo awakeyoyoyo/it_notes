@@ -1,0 +1,15 @@
+f:\it_notes\c#\code\just\bin\Debug\net8.0\just.exe
+f:\it_notes\c#\code\just\bin\Debug\net8.0\just.deps.json
+f:\it_notes\c#\code\just\bin\Debug\net8.0\just.runtimeconfig.json
+f:\it_notes\c#\code\just\bin\Debug\net8.0\just.dll
+f:\it_notes\c#\code\just\bin\Debug\net8.0\just.pdb
+f:\it_notes\c#\code\just\obj\Debug\net8.0\just.GeneratedMSBuildEditorConfig.editorconfig
+f:\it_notes\c#\code\just\obj\Debug\net8.0\just.AssemblyInfoInputs.cache
+f:\it_notes\c#\code\just\obj\Debug\net8.0\just.AssemblyInfo.cs
+f:\it_notes\c#\code\just\obj\Debug\net8.0\just.csproj.CoreCompileInputs.cache
+f:\it_notes\c#\code\just\obj\Debug\net8.0\just.sourcelink.json
+f:\it_notes\c#\code\just\obj\Debug\net8.0\just.dll
+f:\it_notes\c#\code\just\obj\Debug\net8.0\refint\just.dll
+f:\it_notes\c#\code\just\obj\Debug\net8.0\just.pdb
+f:\it_notes\c#\code\just\obj\Debug\net8.0\just.genruntimeconfig.cache
+f:\it_notes\c#\code\just\obj\Debug\net8.0\ref\just.dll
